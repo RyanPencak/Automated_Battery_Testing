@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 printf "{\n" >> data.json
 
@@ -26,7 +26,7 @@ printf "\n}\n" >> data.json
 
 # POST with RESTful HTTP
 # curl -X POST -d @filename http://hostname/resource
-curl -d "@data.json" -X POST -H "Content-Type: application/json" https://bucknellbatterydiagnostics.herokuapp.com/batteryData
+curl -d "@data.json" -X POST -H "Content-Type: application/json" https://batterydiagnostics.herokuapp.com/api/battery
 
 # POST with HTTP
 # curl --data "param1=value1&param2=value2" http://hostname/resource
