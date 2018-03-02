@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+HOME=/root
+LOGNAME=root
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+LANG=en_US.UTF-8
+SHELL=/bin/sh
+PWD=/root
+
 printf "{\n" >> data.json
 
 printf "\"serial_number\": \"" >> data.json
@@ -7,10 +14,15 @@ printf "\"serial_number\": \"" >> data.json
 # get serial number
 system_profiler SPPowerDataType | grep "Serial Number" | awk '{print $3}' | xargs echo -n >> data.json
 
+printf "\",\n\"device_id\": \"" >> data.json
+
+# get device id
+ioreg -l | grep "IOPlatformSerialNumber" | awk '{print $4}' | xargs echo -n >> data.json
+
 printf "\",\n\"rated_capacity\": " >> data.json
 
 # get rated design capacity
-ioreg -l -w0 | grep DesignCapacity | awk '{print $5}' | xargs echo -n >> data.json
+ioreg -l -w0 | grep "DesignCapacity" | awk '{print $5}' | xargs echo -n >> data.json
 
 printf ",\n\"measured_capacity\": " >> data.json
 
@@ -35,3 +47,5 @@ curl -d "@data.json" -X POST -H "Content-Type: application/json" https://battery
 rm data.json
 
 printf "\n"
+
+echo "Battery Report Delivered"
