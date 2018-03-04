@@ -34,14 +34,13 @@ printf ",\n\"cycle_count\": " >> data.json
 # get cycle count
 system_profiler SPPowerDataType | grep "Cycle Count" | awk '{print $3}' | xargs echo -n >> data.json
 
+printf ",\n\"is_software\": true" >> data.json
+
 printf "\n}\n" >> data.json
 
 # POST with RESTful HTTP
 # curl -X POST -d @filename http://hostname/resource
 curl -d "@data.json" -X POST -H "Content-Type: application/json" https://batterydiagnostics.herokuapp.com/api/battery
-
-# POST with HTTP
-# curl --data "param1=value1&param2=value2" http://hostname/resource
 
 # remove data.json
 rm data.json
