@@ -7,6 +7,12 @@ LANG=en_US.UTF-8
 SHELL=/bin/sh
 PWD=/root
 
+IS_LAPTOP=`system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book"`
+
+if [ "$IS_LAPTOP" == "" ]; then
+  exit 1
+fi
+
 printf "{\n" >> data.json
 
 printf "\"serialNum\": \"" >> data.json
