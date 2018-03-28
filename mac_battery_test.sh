@@ -9,27 +9,27 @@ PWD=/root
 
 printf "{\n" >> data.json
 
-printf "\"serial_number\": \"" >> data.json
+printf "\"serialNum\": \"" >> data.json
 
 # get serial number
-system_profiler SPPowerDataType | grep "Serial Number" | awk '{print $3}' | xargs echo -n >> data.json
+system_profiler SPPowerDataType | grep "Serial Number" | awk '{print $3}' | head -n1 | cut -d " " -f1 | xargs echo -n >> data.json
 
-printf "\",\n\"device_id\": \"" >> data.json
+printf "\",\n\"laptopId\": \"" >> data.json
 
 # get device id
 ioreg -l | grep "IOPlatformSerialNumber" | awk '{print $4}' | xargs echo -n >> data.json
 
-printf "\",\n\"rated_capacity\": " >> data.json
+printf "\",\n\"rCap\": " >> data.json
 
 # get rated design capacity
 ioreg -l -w0 | grep "DesignCapacity" | awk '{print $5}' | xargs echo -n >> data.json
 
-printf ",\n\"measured_capacity\": " >> data.json
+printf ",\n\"mCap\": " >> data.json
 
 # get current full charge capacity
 system_profiler SPPowerDataType | grep "Full Charge Capacity" | awk '{print $5}' | xargs echo -n >> data.json
 
-printf ",\n\"cycle_count\": " >> data.json
+printf ",\n\"cycles\": " >> data.json
 
 # get cycle count
 system_profiler SPPowerDataType | grep "Cycle Count" | awk '{print $3}' | xargs echo -n >> data.json
