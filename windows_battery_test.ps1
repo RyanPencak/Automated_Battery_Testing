@@ -1,10 +1,9 @@
 ﻿## Create a battery report in xml format
 powercfg /batteryreport /output "./battery_report.txt" /xml
 
-## Check computer chassis type
-$chassis = Get-WmiObject win32_systemenclosure -
-
-if ($chassis.chassistypes -contains '3'){exit 1}
+## Check computer chassis type and exit if desktop
+# $chassis = Get-WmiObject win32_systemenclosure -
+# if ($chassis.chassistypes -contains '3'){exit 1}
 
 ## Use findstr to get desired information
 $serialNumber = findstr "<SerialNumber>" ./battery_report.txt

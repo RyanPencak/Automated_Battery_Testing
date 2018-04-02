@@ -49,7 +49,7 @@ printf "\n}\n" >> data.json
 curl -d "@data.json" -X POST -H "Content-Type: application/json" https://batterydiagnostics.herokuapp.com/api/battery
 
 # remove data.json
-rm data.json
+#rm data.json
 
 printf "\n"
 
