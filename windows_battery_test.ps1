@@ -33,7 +33,7 @@ $cycles = $cycles.Replace("</CycleCount>","")
 
 
 ## Set battery data to JSON format
-$batteryData = '{ "serialNum": "' + $serialNumber + '", "laptopId": "' + $deviceID + '", "rCap": ' + $ratedCap + ', "mCap": ' + $measuredCap + ', "cycles": ' + $cycles + ', "is_software": true }'
+$batteryData = '{ "serialNum": "' + $serialNumber + '", "laptopId": "' + $deviceID + '", "rCap": ' + $ratedCap + ', "mCap": ' + $measuredCap + ', "cycles": ' + $cycles + ', "is_software": true, "is_windows": true }'
 
 
 ## Define POST information
