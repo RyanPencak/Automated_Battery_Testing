@@ -44,8 +44,7 @@ printf ",\n\"is_software\": true" >> data.json
 
 printf "\n}\n" >> data.json
 
-# POST with RESTful HTTP
-# curl -X POST -d @filename http://hostname/resource
+# POST with RESTful HTTP in format: curl -X POST -d @filename http://hostname/resource
 curl -d "@data.json" -X POST -H "Content-Type: application/json" https://batterydiagnostics.herokuapp.com/api/battery
 
 # remove data.json
